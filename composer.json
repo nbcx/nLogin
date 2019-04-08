@@ -13,7 +13,7 @@
     ],
     "homepage": "http://github.com/nbcx/nLogin",
     "autoload": {
-        "psr-0": { "nLogin": "src/" }
+        "psr-0": { "nbcx/login": "src/" }
     },
     "require":{
         "php":">=5.4.9"

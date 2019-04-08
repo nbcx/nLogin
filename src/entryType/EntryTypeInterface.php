@@ -1,22 +1,21 @@
 <?php
-
-namespace nLogin\entryType;
+namespace nbcx\login\entryType;
 
 
 /**
  * Interface for all OAuth2 Grant Types
  */
-interface EntryTypeInterface {
+interface  EntryTypeInterface {
 
-    public function getQuerystringIdentifier();
+    //登陆页
 
-    public function validateRequest(RequestInterface $request, ResponseInterface $response);
 
-    public function getClientId();
+    //通过code获取token，
 
-    public function getUserId();
+    //code回掉获取token
 
-    public function getScope();
+    //获取openid
 
-    public function createAccessToken(AccessTokenInterface $accessToken, $client_id, $user_id, $scope);
+    //获取用户信息
+
 }

@@ -1,5 +1,5 @@
 <?php
-namespace nLogin\entryType\qq;
+namespace nbcx\login\entryType\qq;
 
 class OAuth2 extends Base {
     /**
@@ -43,20 +43,18 @@ class OAuth2 extends Base {
      * @return string
      */
     public function getAuthUrl($callbackUrl = null, $state = null, $scope = null) {
-        $option = array(
+        $option = [
             'response_type' => 'code',
             'client_id' => $this->appid,
             'redirect_uri' => null === $callbackUrl ? $this->callbackUrl : $callbackUrl,
             'state' => $this->getState($state),
             'scope' => null === $scope ? $this->scope : $scope,
             'display' => $this->display,
-        );
+        ];
         if (null === $this->loginAgentUrl) {
             return $this->getUrl('oauth2.0/authorize', $option);
         }
-        else {
-            return $this->loginAgentUrl . '?' . $this->http_build_query($option);
-        }
+        return $this->loginAgentUrl . '?' . $this->http_build_query($option);
     }
 
     /**
@@ -67,14 +65,14 @@ class OAuth2 extends Base {
      * @return string
      */
     protected function __getAccessToken($storeState, $code = null, $state = null) {
-        parse_str($this->http->get($this->getUrl('oauth2.0/token', array(
+        parse_str($this->http->get($this->getUrl('oauth2.0/token', [
             'grant_type' => 'authorization_code',
             'client_id' => $this->appid,
             'client_secret' => $this->appSecret,
             'code' => isset($code) ? $code : (isset($_GET['code']) ? $_GET['code'] : ''),
             'state' => isset($state) ? $state : (isset($_GET['state']) ? $_GET['state'] : ''),
             'redirect_uri' => $this->getRedirectUri(),
-        )))->body(), $result);
+        ]))->body(), $result);
         $this->result = $result;
         if (isset($this->result['code']) && 0 != $this->result['code']) {
             throw new ApiException($this->result['msg'], $this->result['code']);
@@ -93,11 +91,11 @@ class OAuth2 extends Base {
         if (null === $this->openid) {
             $this->getOpenID($accessToken);
         }
-        $this->result = $this->http->get($this->getUrl('user/get_user_info', array(
+        $this->result = $this->http->get($this->getUrl('user/get_user_info', [
             'access_token' => null === $accessToken ? $this->accessToken : $accessToken,
             'oauth_consumer_key' => $this->appid,
             'openid' => $this->openid,
-        )))->json(true);
+        ]))->json(true);
         if (isset($this->result['ret']) && 0 != $this->result['ret']) {
             throw new ApiException($this->result['msg'], $this->result['ret']);
         }
@@ -112,12 +110,12 @@ class OAuth2 extends Base {
      * @return bool
      */
     public function refreshToken($refreshToken) {
-        $this->result = $this->http->get($this->getUrl('oauth2.0/token', array(
+        $this->result = $this->http->get($this->getUrl('oauth2.0/token', [
             'grant_type' => 'refresh_token',
             'client_id' => $this->appid,
             'client_secret' => $this->appSecret,
             'refresh_token' => $refreshToken,
-        )))->jsonp(true);
+        ]))->jsonp(true);
         return isset($this->result['code']) && 0 == $this->result['code'];
     }
 
@@ -142,9 +140,9 @@ class OAuth2 extends Base {
      * @return string
      */
     public function getOpenID($accessToken = null) {
-        $params = array(
+        $params = [
             'access_token' => null === $accessToken ? $this->accessToken : $accessToken,
-        );
+        ];
         if ($this->isUseUnionID && OpenidMode::UNION_ID === $this->openidMode) {
             $params['unionid'] = $this->openidMode;
         }

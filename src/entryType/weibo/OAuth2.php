@@ -1,5 +1,5 @@
 <?php
-namespace nLogin\entryType\Weibo;
+namespace nbcx\login\entryType\Weibo;
 
 
 class OAuth2 extends Base {
@@ -39,7 +39,7 @@ class OAuth2 extends Base {
      * @param array $params GET参数
      * @return string
      */
-    public function getUrl($name, $params = array()) {
+    public function getUrl($name, $params = []) {
         return static::API_DOMAIN . $name . (empty($params) ? '' : ('?' . $this->http_build_query($params)));
     }
 
@@ -51,7 +51,7 @@ class OAuth2 extends Base {
      * @return string
      */
     public function getAuthUrl($callbackUrl = null, $state = null, $scope = null) {
-        $option = array(
+        $option = [
             'client_id' => $this->appid,
             'redirect_uri' => null === $callbackUrl ? $this->callbackUrl : $callbackUrl,
             'scope' => $scope,
@@ -59,7 +59,7 @@ class OAuth2 extends Base {
             'display' => $this->display,
             'forcelogin' => $this->forcelogin,
             'language' => $this->language,
-        );
+        ];
         if (null === $this->loginAgentUrl) {
             return $this->getUrl('oauth2/authorize', $option);
         }
@@ -76,13 +76,13 @@ class OAuth2 extends Base {
      * @return string
      */
     protected function __getAccessToken($storeState, $code = null, $state = null) {
-        $this->result = $this->http->post($this->getUrl('oauth2/access_token'), array(
+        $this->result = $this->http->post($this->getUrl('oauth2/access_token'), [
             'client_id' => $this->appid,
             'client_secret' => $this->appSecret,
             'grant_type' => 'authorization_code',
             'code' => isset($code) ? $code : (isset($_GET['code']) ? $_GET['code'] : ''),
             'redirect_uri' => $this->getRedirectUri(),
-        ))->json(true);
+        ])->json(true);
         if (isset($this->result['error_code'])) {
             throw new ApiException($this->result['error'], $this->result['error_code']);
         }

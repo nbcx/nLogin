@@ -1,8 +1,9 @@
 <?php
-namespace nLogin\entryType\weixin;
+namespace nbcx\login\entryType\weixin;
 
+use nbcx\login\entryType\EntryType;
 
-class OAuth2 extends Base {
+class OAuth2 extends EntryType {
     /**
      * api接口域名
      */
@@ -31,7 +32,7 @@ class OAuth2 extends Base {
      * @param array $params GET参数
      * @return string
      */
-    public function getUrl($name, $params = array()) {
+    public function getUrl($name, $params = []) {
         if ('http' === substr($name, 0, 4)) {
             $domain = $name;
         }
@@ -96,12 +97,12 @@ class OAuth2 extends Base {
      * @return string
      */
     protected function __getAccessToken($storeState, $code = null, $state = null) {
-        $this->result = $this->http->get($this->getUrl('sns/oauth2/access_token', array(
+        $this->result = $this->http->get($this->getUrl('sns/oauth2/access_token', [
             'appid' => $this->appid,
             'secret' => $this->appSecret,
             'code' => isset($code) ? $code : (isset($_GET['code']) ? $_GET['code'] : ''),
             'grant_type' => 'authorization_code',
-        )))->json(true);
+        ]))->json(true);
         if (isset($this->result['errcode']) && 0 != $this->result['errcode']) {
             throw new ApiException($this->result['errmsg'], $this->result['errcode']);
         }
