@@ -1,5 +1,5 @@
 <?php
-namespace nbcx\login\entryType\Weibo;
+namespace nbcx\oauth\entryType\Weibo;
 
 
 class OAuth2 extends Base {

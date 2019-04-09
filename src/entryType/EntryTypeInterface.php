@@ -1,5 +1,5 @@
 <?php
-namespace nbcx\login\entryType;
+namespace nbcx\oauth\entryType;
 
 
 /**

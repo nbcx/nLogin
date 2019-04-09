@@ -1,5 +1,5 @@
 <?php
-namespace nbcx\login\entryType\weixin;
+namespace nbcx\oauth\entryType\weixin;
 
 class OpenidMode {
     /**

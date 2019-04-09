@@ -1,7 +1,7 @@
 <?php
-namespace nbcx\login\entryType\weixin;
+namespace nbcx\oauth\entryType\weixin;
 
-use nbcx\login\entryType\EntryType;
+use nbcx\oauth\entryType\EntryType;
 
 class OAuth2 extends EntryType {
     /**

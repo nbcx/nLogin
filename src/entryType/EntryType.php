@@ -1,6 +1,7 @@
 <?php
+namespace nbcx\oauth\entryType;
 
-namespace nbcx\login\entryType;
+use nbcx\http\HttpRequest;
 
 
 /**
@@ -10,7 +11,7 @@ abstract class EntryType implements EntryTypeInterface {
 
     /**
      * http请求类
-     * @var Yurun\Util\HttpRequest
+     * @var \nbcx\http\HttpRequest
      */
     public $http;
 
@@ -78,7 +79,7 @@ abstract class EntryType implements EntryTypeInterface {
         $this->appid = $appid;
         $this->appSecret = $appSecret;
         $this->callbackUrl = $callbackUrl;
-        $this->http = new HttpRequest;
+        $this->http = new HttpRequest();
     }
 
     /**

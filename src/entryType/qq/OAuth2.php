@@ -1,7 +1,9 @@
 <?php
-namespace nbcx\login\entryType\qq;
+namespace nbcx\oauth\entryType\qq;
 
-class OAuth2 extends Base {
+use nbcx\oauth\entryType\EntryType;
+
+class OAuth2 extends EntryType {
     /**
      * api接口域名
      */

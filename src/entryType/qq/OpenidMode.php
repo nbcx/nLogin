@@ -1,5 +1,5 @@
 <?php
-namespace nbcx\login\entryType\qq;
+namespace nbcx\oauth\entryType\qq;
 
 class OpenidMode {
 	/**

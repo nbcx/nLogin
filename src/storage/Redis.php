@@ -1,5 +1,5 @@
 <?php
-namespace nLogin\storage;
+namespace nbcx\oauth\storage;
 
 
 class Redis {
