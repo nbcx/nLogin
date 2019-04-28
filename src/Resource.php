@@ -8,22 +8,18 @@
  * file that was distributed with this source code.
  */
 namespace nbcx\oauth;
-
 /**
- * Authenticator
+ * Resource
  *
  * @link https://nb.cx
  * @author: collin <collin@nb.cx>
- * @date: 2019/4/8
+ * @date: 2019/4/28
  */
-class Authenticator {
+class Resource {
 
-    public function ___token() {
-
-    }
-
-    public function ___openid() {
+    public function setToken() {
 
     }
+
 
 }
