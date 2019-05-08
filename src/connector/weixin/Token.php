@@ -19,7 +19,7 @@ use nbcx\http\HttpRequest;
  * @author: collin <collin@nb.cx>
  * @date: 2019/4/28
  */
-class Weixin implements IToken {
+class Token implements IToken {
 
 
     public function refreshToken() {
