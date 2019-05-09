@@ -7,19 +7,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace nbcx\oauth;
+namespace nbcx\oauth\connector\weixin;
+
+use nbcx\oauth\connector\Base;
+
 /**
- * Resource
+ * Authorize
  *
  * @link https://nb.cx
  * @author: collin <collin@nb.cx>
  * @date: 2019/4/28
  */
-class Resource {
+class Authorize extends Base {
 
-    public function setToken() {
-
+    public function get() {
+        // TODO: Implement get() method.
     }
-
 
 }

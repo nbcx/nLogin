@@ -1,5 +1,5 @@
 <?php
-namespace nbcx\oauth\resource;
+namespace nbcx\oauth\connector;
 /*
  * This file is part of the NB Framework package.
  *

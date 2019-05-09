@@ -7,9 +7,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace nbcx\oauth\token;
+namespace nbcx\oauth\connector\weixin;
 
 use nbcx\http\HttpRequest;
+use nbcx\oauth\connector\Base;
 
 /**
  * Weixin
@@ -19,12 +20,9 @@ use nbcx\http\HttpRequest;
  * @author: collin <collin@nb.cx>
  * @date: 2019/4/28
  */
-class Token implements IToken {
+class Token extends Base {
 
-
-    public function refreshToken() {
-        // TODO: Implement refreshToken() method.
-    }
+    protected $host = 'https://api.weixin.qq.com';
 
     public function getToken() {
         $url = 'https://api.weixin.qq.com/sns/oauth2/access_token';
@@ -38,6 +36,24 @@ class Token implements IToken {
             return json_decode($result,true);
         }
         return $result;
+    }
+
+    protected function token() {
+        $code = isset($this->request['code'])?$this->request['code']:'';
+
+        $http = new HttpRequest();
+        $http->get('/sns/oauth2/access_token',[
+            'appid'			=>	$this->appid,
+            'secret'		=>	$this->appSecret,
+            'code'			=>	$code,
+            'grant_type'	=>	'authorization_code',
+        ]);
+    }
+
+    public function get() {
+
+        return $this->token();
+
     }
 
 }

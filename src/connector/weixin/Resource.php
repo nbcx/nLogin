@@ -1,12 +1,15 @@
 <?php
-namespace nbcx\oauth\resource;
+namespace nbcx\oauth\connector\weixin;
+
+use nbcx\oauth\connector\Base;
+
 /**
  *
  * User: Collin
  * QQ: 1169986
  * Date: 16/5/24 下午5:38
  */
-class Weixin implements IResource {
+class Resource extends Base {
 
     private $token;
     private $openid;
@@ -37,4 +40,7 @@ class Weixin implements IResource {
         return $result;
     }
 
+    public function get() {
+        // TODO: Implement get() method.
+    }
 }
