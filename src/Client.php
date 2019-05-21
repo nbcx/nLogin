@@ -8,6 +8,7 @@
  * file that was distributed with this source code.
  */
 namespace nbcx\oauth;
+
 use nbcx\oauth\connector\Base;
 
 /**
@@ -17,7 +18,7 @@ use nbcx\oauth\connector\Base;
  * @author: collin <collin@nb.cx>
  * @date: 2019/5/9
  */
-class Client {
+class Client implements Component {
 
     protected $name;
 
@@ -49,7 +50,7 @@ class Client {
             $type = ucfirst($name);
             $connector = "nbcx\\oauth\\connector\\{$this->name}\\$type";
 
-            $connector = new $connector();
+            $connector = new $connector($this);
         }
         $this->connector = $connector;
         return $this;

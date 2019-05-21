@@ -8,6 +8,10 @@
  * file that was distributed with this source code.
  */
 namespace nbcx\oauth\connector;
+
+use nbcx\oauth\Client;
+use nbcx\oauth\Component;
+
 /**
  * Base
  *
@@ -16,10 +20,19 @@ namespace nbcx\oauth\connector;
  * @author: collin <collin@nb.cx>
  * @date: 2019/5/9
  */
-abstract class Base {
+abstract class Base implements Component {
 
     protected $config = [];
     protected $request = [];
+
+    /**
+     * @var Client
+     */
+    protected $client;
+
+    public function __construct(Client $client) {
+        $this->client = $client;
+    }
 
     public function config(array $config) {
         $this->config = $config;
